@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initiall-scale=1.0">
+<title>Documentation</title>
+<link rel="stylesheet" href="style5.css">
+</head>
+<style>
+
+</style>
+<body>
+    
+        <input type="checkbox" id="nav-hamburger">
+        <label for="nav-hamburger" class="button--hamburger">&#8801;</label>
+        <nav id="navbar">
+            <header>
+              <h1>10 Linux commands </h1> 
+            </header>
+            <div class="top">
+            <a  class="nav-link" href="#Get_free_and_used_memory" onclick="hideNav()">Get free and used memory</a>
+            <a class="nav-link" href ="#Probe_for_hardware" onclick="hideNav()">Probe for hardware</a>
+            <a  class="nav-link" href="#Know_yourself" onclick="hideNav()">Know yourself</a>
+            <a class="nav-link" href="#List_block_storage_devices" onclick="hideNav()">List block storage devices</a>
+            <a class="nav-link" href="#Linux_distribution_information" onclick="hideNav()">Linux distribution information</a>
+            <a class="nav-link" href="#Display_info_about_the_CPUs" onclick="hideNav()">Display info about the CPUs</a>
+            <a class="nav-link" href="#Display_hardware_topology" onclick="hideNav()">Display hardware topology</a>
+            <a class="nav-link" href="#List_usb_devices" onclick="hideNav()">List usb devices</a>
+            <a class="nav-link" href="#View_current_date_and_time_zone" onclick="hideNav()">View current date and time zone</a>
+            <a class="nav-link" href="#Who_is_logged_in" onclick="hideNav()">Who is logged in</a>
+        </div>
+        </nav>
+      
+      
+         <main id="main-doc">
+            <h2>Open the terminal application and then start
+                typing these commands to know your Linux desktop
+                or cloud server/VM</h2>
+
+        <section class="main-section" id="Get_free_and_used_memory">
+            <header><h3>Get free and used memory</h3></header>
+            <p>Are you running out of memory?Use the <em>free</em> command
+             to show the total amount of free and used physical(RAM)
+             and swap memory in the Linux system.It also displays the buffers and caches
+            used by the kernel.We must use the <em>dmidecode</em> command if we
+            want information about:
+            <ul>
+                <li>memory configuration</li>
+                <li>maximum supported memory by the Linux server</li>
+                <li>Linux memory speed</li>
+            </ul>
+            </p>
+           <pre> <code>
+            free 
+            #human readable outputs
+            free -h 
+            #use the cat command to find geeky details
+            cat /proc/meminfo<br><br>
+            sudo dmidecode -t memory
+        </code></pre>
+        </section>
+
+        <section class="main-section" id="Probe_for_hardware">
+           <header><h3>Probe for hardware</h3></header>
+           <p>We can quickly probe for the hardware present in the Linux server or
+            desktop.Alternatively,you may find the <em>lshw</em> command useful
+           to display your Linux hardware information </p>
+          <pre> <code>
+            #find detailed info about the Linux box
+            hwinfo 
+            #show only a summary# 
+            hwinfo --short 
+            #view all disks# 
+            hwinfo --disk 
+            #get an overview# 
+            hwinfo --short --block
+            #find a particular disk# 
+            hwinfo --disk --only /dev/sda 
+            hwinfo --disk --only /dev/sda 
+            #try 4 graphic cards ports for monitor data#
+            hwprobe=bios.ddc.ports=4 hwinfo --monitor 
+            #limit info to specific devices# 
+            hwinfo --short --cpu --disk --listmd --gfxcard --wlan --printer <br><br> 
+            
+            sudo lshw -short 
+            inxi -Fxz 
+        </code></pre> 
+         </section>
+
+        <section class="main-section" id="Know_yourself">
+           <header><h3>Know yourself</h3></header>
+           <p>Display Linux user and group information for the given user name.If user 
+            name omitted show information for the current user by using <em>id</em> command.  
+          You can also see who is logged on your Linux server using <em>who</em> and <em>who am i</em>  </p>
+         <pre><code> 
+            id <br><br>
+            who  
+            who am i
+        </code></pre>
+        </section>
+
+        <section class="main-section" id="List_block_storage_devices">
+         <header><h3>List block storage devices</h3></header>
+         <p>All Linux block devices give buffered access to hardware devices and allow reading and writing
+         blocks as per configuration.Linux block devices has names.You can list them easily using a specific
+        syntax.
+        </p>
+       <pre> <code>
+        lsblk  
+        #list only# 
+        lsblk -l 
+        #filter out loop devices using the grep command# 
+        lsblk -l | grep '^loop' 
+    </code>
+    </pre> 
+        </section>
+
+        <section class="main-section" id="Linux_distribution_information">
+           <header><h3>Linux distribution information</h3></header>
+           <p>The command <em>lsb_release</em> is useful if we want to get distribution-specific
+           information such as,description of of the currently installed distribution,release number 
+           and code name.No LSB modules are available.</p>
+          <pre><code>
+        lsb_release -a 
+          </code></pre> 
+        </section>
+
+        <section class="main-section" id="Display_info_about_the_CPUs">
+            <header><h3>Display info about the CPUs</h3></header>
+            <p>The <em>lscpu</em> command gathers and displays CPU architecture information 
+            in an easy-to-read format for humans including various CPU bugs.CPU can be 
+            listed using the <em>lshw</em> command too.</p>
+            <pre><code>
+        lscpu 
+                
+        sudo lshw -C cpu 
+            </code></pre> 
+        </section>
+
+        <section class="main-section" id="Display_hardware_topology">
+            <header><h3>Display hardware topology</h3></header>
+            <p>If you want to see the topology of the Linux server or desktop try <em>lstopo</em> 
+            and <em>lstopo-no-graphics</em>.You will see information about:
+            <ul>
+                <li>Numa memory nodes</li>
+                <li>shared caches</li>
+                <li>CPU packages</li>
+                <li>processor cores</li>
+                <li>thread and more</li>
+            </ul> </p>
+           <pre>
+            <code>
+        lstop
+        lstopo-no-graphics
+            </code>
+           </pre> 
+        </section>
+
+        <section class="main-section" id="List_usb_devices">
+           <header><h3>List usb devices</h3></header>
+           <p>We all use USB devices,such as external hard drives and keyboards.Run the <em>lsusb</em> 
+           command for displaying information about USB buses in the Linux system and the devices 
+           connected to them.We use the <em>lspci</em> command for displaying information about PCI buses 
+           in the system and devices connected to them.</p>
+          <pre>
+            <code>
+        lsusb
+        #want a graphical summmary of USB devices connected to the system# 
+        sudo usbview <br><br>
+        lspci 
+           </code>   </pre>
+        </section>
+
+        <section class="main-section" id="View_current_date_and_time_zone">
+            <header><h3>View current date and time zone</h3></header>
+            <p>Typically we use the <em>date</em> command to set or get date/time information on the CLI. 
+            However,modern Linux distro use the <em>timedatectl</em> command to query and change the system 
+         clock and its settings,and enable or disable time synchronization services.</p>
+         <pre><code>
+        date <br><br>
+        timedatectl 
+        </code> </pre>
+            
+        </section>
+
+        <section class="main-section" id="Who_is_logged_in">
+           <header><h3>Who is logged in</h3></header>
+           <p>Run the <em>w</em> command on Linux to see information about the Linux users currently 
+        on the machine,and their processes.</p>
+       <pre><code>
+        $ w
+    </code></pre> 
+        </section>
+        <p>And this concluded our ten Linux commands to know the system to increase your 
+            productivity quickly to solve problems.
+        </p>
+
+
+
+    </main>
+<script src="https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js"></script>   
+<script>
+    document.getElementById("nav-hamburger").checked=true;
+    function hideNav(){
+        document.getElementById("nav-hamburger").checked=false;
+    }
+</script>
+</body>
+</html>
